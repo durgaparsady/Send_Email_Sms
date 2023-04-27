@@ -30,12 +30,14 @@ public class SmsController {
 //	}
 
 	@PostMapping("/send-sms-twilio")
-    public ResponseEntity<String> sendSms(@Valid @RequestBody SmsRequest smsRequest) {
+    public ResponseEntity<String> sendSms(@Valid @RequestBody SmsRequest smsRequest) { 
+		
+		System.err.println(smsRequest);
+		System.out.println();
 		
 		System.err.println(twilioProperty.getAccountSid());
 		System.err.println(twilioProperty.getAuthToken());
-		System.err.println(twilioProperty.getTrialNumber());
-		
+		System.err.println(twilioProperty.getTrialNumber()); 
 		 Twilio.init(
 	        		twilioProperty.getAccountSid(),   //Account SID
 	        		twilioProperty.getAuthToken()     //TWILIO_AUTH_TOKEN
