@@ -18,20 +18,21 @@
 			<div class="col-md-10 offset-md-1">
 				<div class="card">
 					<div class="card-body">
-						<p class="text-center fs-3">Email-Sending-App</p> 
-						<form th:action="@{/sendSms}" method="post" th:object="${sms}" >
+						<p class="text-center fs-3">Email-Sending-App</p>
+						<form th:action="@{/sendSms}" method="post" th:object="${sms}">
 							<div class="mb-3">
 								<lable>Enter Register Phone Number</lable>
-								<input type="text"  placeholder="+91 9753975548" th:field="*{phoneNumber}" name="phoneNumber"
+								<input type="text" placeholder="+91 9753975548"
+									th:field="*{phoneNumber}" name="phoneNumber"
 									class="form-control">
 							</div>
-						 	<div class="mb-3">
+							<div class="mb-3">
 								<lable>Message</lable>
 								<input type="text" th:field="*{message}" name="message"
 									class="form-control">
 							</div>
-							 
-							
+
+
 							<button class="btn btn-primary col-md-12">Send</button>
 						</form>
 					</div>

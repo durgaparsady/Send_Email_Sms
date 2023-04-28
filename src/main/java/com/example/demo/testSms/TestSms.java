@@ -15,8 +15,6 @@ public class TestSms {
 	@Autowired
 	private SmsConfig config;
 
-	 
-
 	@PostMapping("/sendingSms")
 	public String sendSms(@RequestBody SmsDto smsData) {
 		System.err.println(config.getAccountSid());
@@ -32,8 +30,8 @@ public class TestSms {
 
 				Message.creator(to, from, smsData.getMessage()).create();
 				return "Send Message Successfull";
-			}else {
-				return "Please Enter Number";
+			} else {
+				return "sPlease Enter Number";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

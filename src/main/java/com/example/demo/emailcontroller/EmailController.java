@@ -27,17 +27,18 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class EmailController {
-    @GetMapping("/")
-    public ModelAndView homePage(Model model) {
-    	Email email=new Email();
-    	
-    	model.addAttribute("email", email);
-    	return  new ModelAndView("home");
-    }
+	@GetMapping("/")
+	public ModelAndView homePage(Model model) {
+		Email email = new Email();
+
+		model.addAttribute("email", email);
+		return new ModelAndView("home");
+	}
+
 	@PostMapping("/sendEmail")
-	public String sendingEmail(@ModelAttribute Email email ,HttpSession httpSession) {
+	public String sendingEmail(@ModelAttribute Email email, HttpSession httpSession) {
 		System.out.println(email);
-		 
+
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", "smtp.gmail.com");
 		properties.put("mail.smtp.port", 465);
@@ -66,29 +67,30 @@ public class EmailController {
 			msg.setContent(mimeMultipart);
 			try {
 				textMime.setText(email.getMessage());
-				
-				//file uploading code
+
+				// file uploading code
 				String filename = email.getFile().getOriginalFilename();
- 				byte[] data = email.getFile().getBytes();
-				String path = httpSession.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "image"+ File.separator + filename;
+				byte[] data = email.getFile().getBytes();
+				String path = httpSession.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "image"
+						+ File.separator + filename;
 				System.out.println("path : " + path);
 				FileOutputStream fos = new FileOutputStream(path);
 				fos.write(data);
-				fos.close();//end file uploading
-				 
-				File file = new File(path); 
-				
+				fos.close();// end file uploading
+
+				File file = new File(path);
+
 				fileMime.attachFile(file);
 				mimeMultipart.addBodyPart(textMime);
 				mimeMultipart.addBodyPart(fileMime);
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 //			msg.setText(email.getMessage());
 			Transport.send(msg);
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 		return "Send Email Successfully !";
 
