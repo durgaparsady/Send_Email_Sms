@@ -30,6 +30,7 @@ public class EmailController {
     @GetMapping("/")
     public ModelAndView homePage(Model model) {
     	Email email=new Email();
+    	
     	model.addAttribute("email", email);
     	return  new ModelAndView("home");
     }
